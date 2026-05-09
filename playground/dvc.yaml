@@ -1,0 +1,45 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py ${prepare}
+    deps:
+      - src/prepare.py
+      - data/raw
+    params:
+      - prepare
+    outs:
+      - data/split
+
+  featurize:
+    cmd: python src/featurize.py ${features}
+    deps:
+      - src/featurize.py
+      - data/split
+    params:
+      - features
+    outs:
+      - data/features
+
+  train:
+    cmd: python src/train.py ${train}
+    deps:
+      - src/train.py
+      - data/features
+    params:
+      - train
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py ${evaluate}
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/features
+    params:
+      - evaluate
+    metrics:
+      - metrics/metrics.json:
+          cache: false
+    plots:
+      - plots/roc.json:
+          cache: false
