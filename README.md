@@ -25,15 +25,17 @@ A self-contained sandbox for learning and experimenting with [DVC](https://dvc.o
 - Python 3
 - [DVC](https://dvc.org/doc/install) (`pip install dvc`)
 
-## Usage
+## Getting Started
 
-### Reset to a clean state
+Run `reset.sh` first to initialize the dummy Git remote and DVC store:
 
 ```bash
 ./reset.sh
 ```
 
-This reinitializes Git and DVC, sets up local dummy remotes, and creates an initial commit. Run this to start fresh.
+This sets up a local bare Git repo (`dummy-git-remote/`) and a local DVC remote (`dummy-s3/`), initializes DVC, and creates an initial commit. **You must run this before using the pipeline.**
+
+## Usage
 
 ### Run the pipeline
 
